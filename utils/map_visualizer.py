@@ -11,11 +11,11 @@ class MapVisualizer:
         self.fig.canvas.mpl_connect('key_press_event', self.on_key)
 
         # Define color map for different types of cells
-        self.cmap = ListedColormap(['white', 'gray', 'palegreen', 'lightpink', 'powderblue','gold' ])
+        self.cmap = ListedColormap(['white', 'darkgray', 'palegreen', 'lightpink', 'powderblue','gold' ])
         self.norm = BoundaryNorm([0, 1, 2, 3, 4, 5, 6], self.cmap.N)
         self.time_input = None  # Initialize time_input attribute
 
-    def display_map(self, city_map,path_time=None,path_fuel = None,  path=None, current_pos=None):
+    def display_map(self, city_map,path_time,path_fuel ,  path=None, current_pos=None):
         self.ax.clear()
         
         # Convert city_map to a 2D NumPy array
@@ -35,10 +35,10 @@ class MapVisualizer:
                     map_array[i][j] = 0  # Path
                 elif city_map[i][j] == '-1':
                     map_array[i][j] = 1  # Building
-                elif city_map[i][j] == 'S':
+                elif isinstance(city_map[i][j], str) and city_map[i][j][0] =='S':
                     map_array[i][j] = 2  # Start
-                elif city_map[i][j] == 'G':
-                    map_array[i][j] = 3  # Goal
+                elif isinstance(city_map[i][j], str) and  city_map[i][j][0] =='G':
+                    map_array[i][j] = 3  # Goa
                 elif city_map[i][j].isdigit() and int(city_map[i][j]) > 0:
                     map_array[i][j] = 4  # Toll Booth
                 elif isinstance(city_map[i][j], str) and len(city_map[i][j]) > 1 and city_map[i][j][0] == 'F' :
@@ -64,10 +64,10 @@ class MapVisualizer:
         # Add text labels to the cells
         for i in range(n):
             for j in range(m):
-                if city_map[i][j] == 'S':
-                    self.ax.text(j, i, 'S', ha='center', va='center', color='black',fontsize = 13.5)
-                elif city_map[i][j] == 'G':
-                    self.ax.text(j, i, 'G', ha='center', va='center', color='black',fontsize = 13.5)
+                if isinstance(city_map[i][j], str) and city_map[i][j][0] =='S':
+                    self.ax.text(j, i, city_map[i][j], ha='center', va='center', color='black',fontsize = 13.5)
+                elif isinstance(city_map[i][j], str) and city_map[i][j][0] == 'G':
+                    self.ax.text(j, i, city_map[i][j], ha='center', va='center', color='black',fontsize = 13.5)
                 elif city_map[i][j].isdigit() and int(city_map[i][j]) > 0:
                     self.ax.text(j, i, city_map[i][j], ha='center', va='center', color='black',fontsize =13.5)
                 elif isinstance(city_map[i][j], str) and len(city_map[i][j]) > 1 and city_map[i][j][0] == 'F':

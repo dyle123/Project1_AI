@@ -311,7 +311,7 @@ def run(file_path, level):
         toll_booth_positions = []  # Danh sách để lưu trữ vị trí của các ô đặc biệt
 
         if path is None:
-            visualizer.display_map(city_map)
+            visualizer.display_map(city_map,0,0)
             plt.pause(1)
             messagebox.showinfo("Result", "No path found or limit time.")
         else:
@@ -340,7 +340,7 @@ def run(file_path, level):
                     city_map[i][j] = 'S'
                                     
                     # Display the updated map
-                    visualizer.display_map(city_map, path=path, current_pos=step)
+                    visualizer.display_map(city_map,0,0, path=path, current_pos=step)
                     
                     # Update start position
                     start = (i, j)
@@ -356,7 +356,7 @@ def run(file_path, level):
                 city_map[start[0]][start[1]] = '0'
                 city_map[goal[0]][goal[1]] = 'G'
                 city_map[path[0][0]][path[0][1]] = 'S'
-                visualizer.display_map(city_map)
+                visualizer.display_map(city_map,0,0)
                 
                 # Draw the path line from start to goal
                 path_x = [step[1]  for step in path]  # X-coordinates (columns)

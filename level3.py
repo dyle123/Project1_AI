@@ -141,6 +141,7 @@ def calcu_time_fuel( city_map,grid, start, goal, t, f,gas_stations, toll_booths)
 def run(file_path, level):
     if not file_path:
         return
+    x= 0
     while True:
         # Reload the city map
         visualizer = MapVisualizer(file_path, level)
@@ -164,8 +165,9 @@ def run(file_path, level):
                     start = (i, j)
                 elif val == 'G':
                     goal = (i, j)
-
-        path_time, path_fuel = calcu_time_fuel(city_map,grid, start, goal, t,f,gas_stations, toll_booths)
+        x+=1
+        if x == 1: 
+            path_time, path_fuel = calcu_time_fuel(city_map,grid, start, goal, t,f,gas_stations, toll_booths)
 
         if start is None or goal is None:
             print("Start or Goal not found in the city map.")
@@ -207,7 +209,7 @@ def run(file_path, level):
                     city_map[i][j] = 'S'
                                     
                     # Display the updated map
-                    visualizer.display_map(city_map, path_time, path=path, current_pos=step)
+                    visualizer.display_map(city_map, path_time, path_fuel, path=path, current_pos=step)
                     
                     # Update start position
                     start = (i, j)
@@ -223,7 +225,7 @@ def run(file_path, level):
                 city_map[start[0]][start[1]] = '0'
                 city_map[goal[0]][goal[1]] = 'G'
                 city_map[path[0][0]][path[0][1]] = 'S'
-                visualizer.display_map(city_map, path_time)
+                visualizer.display_map(city_map, path_time,path_fuel)
                 
                 # Draw the path line from start to goal
                 path_x = [step[1]  for step in path]  # X-coordinates (columns)
