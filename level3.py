@@ -5,7 +5,7 @@ import time
 import tkinter as tk
 import numpy as np
 from matplotlib.colors import ListedColormap, BoundaryNorm
-from utils.map_visualizer import MapVisualizer
+from map_visualizer import MapVisualizer
 
 
 

@@ -1,7 +1,7 @@
 import multiprocessing
 import tkinter as tk
 import importlib
-from utils.map_visualizer import MapVisualizer
+from map_visualizer import MapVisualizer
 import sys
 
 def run_level(file_path, level):

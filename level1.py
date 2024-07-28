@@ -1,6 +1,6 @@
 import time
 from collections import deque
-from utils.map_visualizer import MapVisualizer
+from map_visualizer import MapVisualizer
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 import numpy as np
